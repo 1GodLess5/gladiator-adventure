@@ -24,8 +24,8 @@ public class Hero {
         return availablePoints;
     }
 
-    public void setAvailablePoints(int availablePoints) {
-        this.availablePoints = availablePoints;
+    public void updateAvailablePoints(int delta) {
+        this.availablePoints += delta;
     }
 
     public void updateAbility(Ability ability, int delta){
