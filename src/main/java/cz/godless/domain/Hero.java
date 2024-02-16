@@ -1,6 +1,8 @@
 package cz.godless.domain;
 
 import cz.godless.ability.Ability;
+import cz.godless.constant.Constant;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +14,7 @@ public class Hero {
     public Hero(String name) {
         this.name = name;
         this.abilities = this.getInitialAbilities();
-        this.availablePoints = 7;
+        this.availablePoints = Constant.INITIAL_ABILITY_POINTS;
     }
 
     public void setName(String name){
@@ -37,7 +39,7 @@ public class Hero {
 
     public void updateAbility(Ability ability, int delta){
         if (ability.equals(Ability.HEALTH)) {
-            this.abilities.put(ability, this.abilities.get(ability) + delta * 5);
+            this.abilities.put(ability, this.abilities.get(ability) + delta * Constant.HEALTH_OF_ONE_POINT);
         } else {
             this.abilities.put(ability, this.abilities.get(ability) + delta);
         }
