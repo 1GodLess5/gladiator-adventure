@@ -1,5 +1,10 @@
+package cz.godless;
+
+import cz.godless.ability.Ability;
+import cz.godless.domain.Hero;
+import cz.godless.utility.InputUtils;
+
 import java.util.Map;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {

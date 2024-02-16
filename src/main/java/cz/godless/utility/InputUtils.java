@@ -1,3 +1,5 @@
+package cz.godless.utility;
+
 import java.util.Scanner;
 
 public class InputUtils {

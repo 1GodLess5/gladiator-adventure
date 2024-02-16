@@ -1,3 +1,6 @@
+package cz.godless.domain;
+
+import cz.godless.ability.Ability;
 import java.util.HashMap;
 import java.util.Map;
 
