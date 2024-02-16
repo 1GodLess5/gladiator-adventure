@@ -28,6 +28,15 @@ public class Hero {
         this.availablePoints = availablePoints;
     }
 
+    public void updateAbility(Ability ability, int delta){
+        if (ability.equals(Ability.HEALTH)) {
+            this.abilities.put(ability, this.abilities.get(ability) + delta * 5);
+        } else {
+            this.abilities.put(ability, this.abilities.get(ability) + delta);
+        }
+
+    }
+
     private Map<Ability, Integer> getInitialAbilities() {
         return new HashMap<>(Map.of(
                 Ability.ATTACK, 1,
