@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Hero {
-    private final String name;
+    private String name;
     private Map<Ability, Integer> abilities;
     private int availablePoints;
 
@@ -13,6 +13,10 @@ public class Hero {
         this.name = name;
         this.abilities = this.getInitialAbilities();
         this.availablePoints = 7;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     public String getName() {
