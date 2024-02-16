@@ -11,4 +11,8 @@ public enum Ability {
     Ability(String description){
         this.description = description;
     }
+
+    public String getDescription() {
+        return description;
+    }
 }
