@@ -22,11 +22,13 @@ public class GameManager {
         System.out.println("Enter your name (this will be used to track your progress):");
         final String name = InputUtils.readString();
 
-        final Hero hero = new Hero(name);
+        this.hero.setName(name);
         System.out.println("Hello " + hero.getName() + ".");
         System.out.println("Let's begin!");
+        PrintUtils.printDivider();
         System.out.println("Your abilities:");
         PrintUtils.printAbilities(hero);
+        PrintUtils.printDivider();
         this.heroAbilityManager.spendHeroAvailablePoints();
     }
 }
