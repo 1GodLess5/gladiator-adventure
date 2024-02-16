@@ -2,6 +2,7 @@ package cz.godless.ability;
 
 import cz.godless.domain.Hero;
 import cz.godless.utility.InputUtils;
+import cz.godless.utility.PrintUtils;
 
 import java.util.Map;
 
@@ -55,17 +56,12 @@ public class HeroAbilityManager {
 
             hero.updateAvailablePoints(-1);
             if (availablePoints > 1){
-                for (Map.Entry<Ability, Integer> entry : hero.getAbilities().entrySet()){
-                    System.out.print(entry.getKey() + ": " + entry.getValue() + ", ");
-                }
-                System.out.println();
+                PrintUtils.printAbilities(hero);
             }
+            PrintUtils.printDivider();
             availablePoints--;
         }
         System.out.println("You have spent all your available points. Your abilities are:");
-        for (Map.Entry<Ability, Integer> entry : hero.getAbilities().entrySet()){
-            System.out.print(entry.getKey() + ": " + entry.getValue() + ", ");
-        }
-        System.out.println();
+        PrintUtils.printAbilities(hero);
     }
 }
