@@ -1,7 +1,9 @@
 package cz.godless.service;
 
+import cz.godless.ability.Ability;
 import cz.godless.domain.Hero;
 import cz.godless.utility.InputUtils;
+import cz.godless.utility.PrintUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,24 +21,42 @@ public class FileService {
 
             final String path = "saved-games/" + name + ".txt";
             if (new File(path).exists()){
-                System.out.println("Game with this name is already saved.");
+                PrintUtils.printDivider();
+                System.out.println("Save with this name already exists.");
+                PrintUtils.printDivider();
                 continue;
             }
 
             try {
-                String heroDataToString = "TODO";
-                Files.writeString(Path.of(path), heroDataToString);
+                Files.writeString(Path.of(path), this.heroDataToString(hero, currentLevel));
+                System.out.println("Your progress was successfully saved!");
+                PrintUtils.printDivider();
 
             } catch (IOException e){
-                System.out.println("Oops, we encountered an error saving this game.");
+                PrintUtils.printDivider();
+                System.out.println("Oops, we encountered an error while saving this game.");
                 System.out.println("Please try again.");
+                PrintUtils.printDivider();
                 continue;
             } catch (InvalidPathException e){
+                PrintUtils.printDivider();
                 System.out.println("Invalid characters in file name.");
                 System.out.println("Please try again.");
+                PrintUtils.printDivider();
                 continue;
             }
             break;
         }
+    }
+
+    private String heroDataToString(Hero hero, int currentLevel){
+        final StringBuilder sb = new StringBuilder();
+        sb.append(currentLevel).append("\n");
+        sb.append(hero.getName()).append("\n");
+        sb.append(hero.getAvailablePoints()).append("\n");
+        for (Ability ability: Ability.values()){
+            sb.append(ability).append(":").append(hero.getAbilities().get(ability)).append("\n");
+        }
+        return sb.toString();
     }
 }
