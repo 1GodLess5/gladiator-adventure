@@ -3,11 +3,12 @@ package cz.godless.service;
 import cz.godless.ability.HeroAbilityManager;
 import cz.godless.constant.Constant;
 import cz.godless.domain.Hero;
+import cz.godless.domain.LoadedGame;
 import cz.godless.utility.InputUtils;
 import cz.godless.utility.PrintUtils;
 
 public class GameManager {
-    private final Hero hero;
+    private Hero hero;
     private final HeroAbilityManager heroAbilityManager;
     private int currentLevel;
     private final FileService fileService;
@@ -62,6 +63,29 @@ public class GameManager {
 
     private void initGame() {
         System.out.println("Welcome to the Gladiator Adventure");
+        System.out.println("0 - Start new game");
+        System.out.println("1 - Load game");
+
+        while (true){
+            final int choice = InputUtils.readInt();
+            switch (choice){
+                case 0 -> PrintUtils.printDivider();
+                case 1 -> {
+                    final LoadedGame loadGame = fileService.loadGame();
+                    if (loadGame != null){
+                        this.hero = loadGame.getHero();
+                        this.currentLevel = loadGame.getLevel();
+                        return;
+                    }
+                }
+                default -> {
+                    System.out.println("Invalid input.");
+                    continue;
+                }
+            }
+            break;
+        }
+
         System.out.println("Enter your Hero name:");
         final String name = InputUtils.readString();
 
