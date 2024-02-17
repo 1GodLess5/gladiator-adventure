@@ -10,11 +10,13 @@ public class GameManager {
     private final Hero hero;
     private final HeroAbilityManager heroAbilityManager;
     private int currentLevel;
+    private final FileService fileService;
 
     public GameManager() {
         this.hero = new Hero("");
         this.heroAbilityManager = new HeroAbilityManager(this.hero);
         this.currentLevel = Constant.INITIAL_LEVEL;
+        this.fileService = new FileService();
     }
 
     public void startGame() {
@@ -37,7 +39,7 @@ public class GameManager {
                     this.upgradeAbilitiesCycle();
                 }
                 case 2 -> {
-                    //TODO save game
+                    this.fileService.saveGame(this.hero, this.currentLevel);
                 }
                 case 3 -> {
                     System.out.println("Are you sure?");
@@ -60,7 +62,7 @@ public class GameManager {
 
     private void initGame() {
         System.out.println("Welcome to the Gladiator Adventure");
-        System.out.println("Enter your name (this will be used to track your progress):");
+        System.out.println("Enter your Hero name:");
         final String name = InputUtils.readString();
 
         this.hero.setName(name);
