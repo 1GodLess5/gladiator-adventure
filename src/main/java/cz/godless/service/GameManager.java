@@ -2,22 +2,28 @@ package cz.godless.service;
 
 import cz.godless.ability.HeroAbilityManager;
 import cz.godless.constant.Constant;
+import cz.godless.domain.Enemy;
 import cz.godless.domain.Hero;
 import cz.godless.domain.LoadedGame;
+import cz.godless.utility.EnemyGenerator;
 import cz.godless.utility.InputUtils;
 import cz.godless.utility.PrintUtils;
+
+import java.util.Map;
 
 public class GameManager {
     private Hero hero;
     private final HeroAbilityManager heroAbilityManager;
     private int currentLevel;
     private final FileService fileService;
+    private final Map<Integer, Enemy> enemiesByLevel;
 
     public GameManager() {
         this.hero = new Hero("");
         this.heroAbilityManager = new HeroAbilityManager(this.hero);
         this.currentLevel = Constant.INITIAL_LEVEL;
         this.fileService = new FileService();
+        this.enemiesByLevel = EnemyGenerator.createEnemies();
     }
 
     public void startGame() {
