@@ -13,6 +13,10 @@ public abstract class GameCharacter {
         this.abilities = abilities;
     }
 
+    public void receiveDamage(int damage) {
+        abilities.put(Ability.HEALTH, Math.max(0, abilities.get(Ability.HEALTH) - damage));
+    }
+
     public Map<Ability, Integer> getAbilities() {
         return abilities;
     }
