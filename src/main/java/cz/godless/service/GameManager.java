@@ -1,5 +1,6 @@
 package cz.godless.service;
 
+import cz.godless.ability.Ability;
 import cz.godless.ability.HeroAbilityManager;
 import cz.godless.constant.Constant;
 import cz.godless.domain.Enemy;
@@ -43,7 +44,20 @@ public class GameManager {
             switch (choice) {
                 case 0 -> {
                     if (this.battleService.isHeroReadyToBattle(this.hero, enemy)){
-                        this.currentLevel++;
+                        final int heroHealthBeforeBattle = this.hero.getAbilities().get(Ability.HEALTH);
+                        final boolean hasHeroWon = this.battleService.battle(this.hero, enemy);
+
+                        if (hasHeroWon) {
+                            PrintUtils.printDivider();
+                            System.out.println("You have won this battle! You have gained " + this.currentLevel + " ability points.");
+                            this.hero.updateAvailablePoints(this.currentLevel);
+                            this.currentLevel++;
+                        } else {
+                            System.out.println("You have lost.");
+                        }
+                        this.hero.setAbility(Ability.HEALTH, heroHealthBeforeBattle);
+                        System.out.println("You have full health now.");
+                        PrintUtils.printDivider();
                     }
                 }
                 case 1 -> {
