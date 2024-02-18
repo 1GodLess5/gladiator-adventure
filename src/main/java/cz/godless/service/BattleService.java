@@ -46,6 +46,12 @@ public class BattleService {
             } else if (enemyLife <= 0) {
                 return true;
             }
+
+            try {
+                Thread.sleep(Constant.BATTLE_DELAY_MILLIS);
+            } catch (InterruptedException e) {
+                System.out.println();
+            }
         }
     }
 
