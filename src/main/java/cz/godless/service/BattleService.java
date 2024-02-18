@@ -17,6 +17,7 @@ public class BattleService {
     public BattleService() {
         this.random = new Random();
     }
+
     public boolean battle(Hero hero, Enemy enemy){
         final Map<Ability, Integer> heroAbilities = hero.getAbilities();
         final Map<Ability, Integer> enemyAbilities = enemy.getAbilities();
