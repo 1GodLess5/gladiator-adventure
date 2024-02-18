@@ -16,6 +16,7 @@ public class GameManager {
     private final HeroAbilityManager heroAbilityManager;
     private int currentLevel;
     private final FileService fileService;
+    private final BattleService battleService;
     private final Map<Integer, Enemy> enemiesByLevel;
 
     public GameManager() {
@@ -23,14 +24,16 @@ public class GameManager {
         this.heroAbilityManager = new HeroAbilityManager(this.hero);
         this.currentLevel = Constant.INITIAL_LEVEL;
         this.fileService = new FileService();
+        this.battleService = new BattleService();
         this.enemiesByLevel = EnemyGenerator.createEnemies();
     }
 
     public void startGame() {
         this.initGame();
 
-        while (this.currentLevel <= 5){
-            System.out.println("0 - Fight " + "Level " + this.currentLevel);
+        while (this.currentLevel <= this.enemiesByLevel.size()){
+            final Enemy enemy = this.enemiesByLevel.get(this.currentLevel);
+            System.out.println("0 - Fight " + enemy.getName() + " (Level " + this.currentLevel + ")");
             System.out.println("1 - Upgrade abilities (" + this.hero.getAvailablePoints() + " points to spend)");
             System.out.println("2 - Save Game");
             System.out.println("3 - Exit Game");
@@ -39,8 +42,9 @@ public class GameManager {
 
             switch (choice) {
                 case 0 -> {
-//                    TODO FIGHT
-                    this.currentLevel++;
+                    if (this.battleService.isHeroReadyToBattle(this.hero, enemy)){
+                        this.currentLevel++;
+                    }
                 }
                 case 1 -> {
                     this.upgradeAbilitiesCycle();
